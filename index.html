@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Fafnir Fetish Cult</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+
+background:#0d1117;
+color:white;
+overflow-x:hidden;
+
+background-image:
+radial-gradient(circle at top,#5865F233 0%,transparent 45%),
+linear-gradient(#0d1117,#12161d);
+
+}
+
+header{
+
+height:90vh;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:40px;
+
+}
+
+.hero{
+
+display:flex;
+align-items:center;
+justify-content:center;
+gap:80px;
+flex-wrap:wrap;
+
+}
+
+.hero img{
+
+width:320px;
+max-width:90%;
+border-radius:20px;
+box-shadow:0 0 35px #5865F288;
+border:3px solid #5865F2;
+
+}
+
+.hero-text{
+
+max-width:600px;
+
+}
+
+.hero-text h1{
+
+font-size:4rem;
+color:#7289DA;
+
+}
+
+.hero-text h2{
+
+font-size:1.4rem;
+font-weight:300;
+margin-top:10px;
+color:#ccc;
+
+}
+
+.hero-text p{
+
+margin-top:30px;
+line-height:1.8;
+color:#ddd;
+
+}
+
+.join{
+
+display:inline-block;
+margin-top:35px;
+padding:18px 40px;
+background:#5865F2;
+text-decoration:none;
+color:white;
+font-size:20px;
+border-radius:14px;
+transition:.25s;
+
+}
+
+.join:hover{
+
+background:#7289DA;
+transform:translateY(-3px);
+
+}
+
+section{
+
+max-width:1100px;
+margin:auto;
+padding:70px 25px;
+
+}
+
+.card{
+
+background:#161b22;
+border:1px solid #2f3640;
+border-radius:20px;
+padding:40px;
+box-shadow:0 0 20px rgba(0,0,0,.35);
+
+}
+
+.card h2{
+
+color:#7289DA;
+margin-bottom:25px;
+font-size:2rem;
+
+}
+
+.card p{
+
+line-height:1.8;
+color:#ddd;
+
+}
+
+.people{
+
+display:flex;
+gap:30px;
+margin-top:35px;
+flex-wrap:wrap;
+
+}
+
+.person{
+
+flex:1;
+min-width:220px;
+background:#20262f;
+padding:25px;
+border-radius:15px;
+text-align:center;
+
+}
+
+.person h3{
+
+color:#7289DA;
+margin-bottom:10px;
+
+}
+
+footer{
+
+margin-top:70px;
+padding:35px;
+text-align:center;
+background:#0b0d12;
+border-top:1px solid #2d333b;
+
+}
+
+.logo{
+
+display:flex;
+justify-content:center;
+align-items:center;
+gap:12px;
+margin-top:25px;
+
+}
+
+.logo img{
+
+width:55px;
+height:55px;
+border-radius:50%;
+border:2px solid #5865F2;
+
+}
+
+small{
+
+color:#888;
+
+}
+.desire{
+
+    margin:35px auto;
+    max-width:700px;
+
+    text-align:center;
+
+    font-family:"Cinzel", Georgia, serif;
+    font-size:1.2rem;
+    font-weight:600;
+
+    line-height:1.8;
+    letter-spacing:2px;
+    text-transform:uppercase;
+
+    color:#f5f5f5;
+
+    text-shadow:
+        0 0 4px rgba(255,255,255,.25),
+        0 0 10px rgba(114,137,218,.3);
+
+    position:relative;
+    padding:20px;
+
+}
+
+.desire::before{
+
+    content:"❝";
+
+    position:absolute;
+    left:5px;
+    top:-8px;
+
+    font-size:2.5rem;
+    color:rgba(114,137,218,.25);
+
+}
+
+.desire::after{
+
+    content:"❞";
+
+    position:absolute;
+    right:5px;
+    bottom:-18px;
+
+    font-size:2.5rem;
+    color:rgba(114,137,218,.25);
+
+}
+
+.desire{
+    animation:quoteGlow 4s ease-in-out infinite alternate;
+}
+
+@keyframes quoteGlow{
+
+    from{
+        text-shadow:
+            0 0 3px rgba(255,255,255,.2),
+            0 0 8px rgba(114,137,218,.2);
+    }
+
+    to{
+        text-shadow:
+            0 0 5px rgba(255,255,255,.35),
+            0 0 14px rgba(114,137,218,.4);
+    }
+
+}
+/* ========================= */
+/* RESPONSIVE DESIGN */
+/* ========================= */
+
+html{
+    font-size:100%;
+}
+
+img{
+    max-width:100%;
+    height:auto;
+}
+
+/* Tablets */
+
+@media (max-width:900px){
+
+header{
+
+height:auto;
+padding:60px 25px;
+
+}
+
+.hero{
+
+flex-direction:column;
+text-align:center;
+gap:40px;
+
+}
+
+.hero img{
+
+width:260px;
+
+}
+
+.hero-text{
+
+max-width:100%;
+
+}
+
+.hero-text h1{
+
+font-size:3rem;
+
+}
+
+.hero-text h2{
+
+font-size:1.2rem;
+
+}
+
+.hero-text p{
+
+font-size:1rem;
+
+}
+
+.people{
+
+justify-content:center;
+
+}
+
+.person{
+
+min-width:260px;
+
+}
+
+.desire{
+
+font-size:1rem;
+
+padding:15px;
+
+}
+
+}
+
+
+/* Phones */
+
+@media (max-width:600px){
+
+header{
+
+padding:40px 18px;
+
+}
+
+.hero{
+
+gap:25px;
+
+}
+
+.hero img{
+
+width:190px;
+
+border-width:2px;
+
+}
+
+.hero-text h1{
+
+font-size:2.2rem;
+line-height:1.1;
+
+}
+
+.hero-text h2{
+
+font-size:1rem;
+
+}
+
+.hero-text p{
+
+font-size:.95rem;
+line-height:1.7;
+
+}
+
+.join{
+
+display:block;
+
+width:100%;
+
+padding:15px;
+
+font-size:18px;
+
+text-align:center;
+
+}
+
+section{
+
+padding:50px 18px;
+
+}
+
+.card{
+
+padding:25px;
+
+}
+
+.card h2{
+
+font-size:1.6rem;
+
+}
+
+.people{
+
+flex-direction:column;
+
+gap:18px;
+
+}
+
+.person{
+
+width:100%;
+min-width:unset;
+
+}
+
+.logo{
+
+flex-direction:column;
+
+text-align:center;
+
+}
+
+.logo img{
+
+width:48px;
+height:48px;
+
+}
+
+.desire{
+
+font-size:.85rem;
+
+letter-spacing:1px;
+
+padding:12px;
+
+line-height:1.6;
+
+}
+
+.desire::before{
+
+font-size:1.8rem;
+top:-5px;
+
+}
+
+.desire::after{
+
+font-size:1.8rem;
+bottom:-12px;
+
+}
+
+footer{
+
+padding:25px 15px;
+
+}
+
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="hero">
+
+<img src="fafnir.png" alt="Fafnir Logo">
+
+<div class="hero-text">
+
+<h1>FAFNIR FETISH CULT</h1>
+
+<h2>Desire Above All.</h2>
+
+<p>
+
+Long before kingdoms and gods settled into order,
+there existed one whose only law was desire.
+
+Fafnir stole the very Principle of Domination from the gods—not to rule forever,
+but because claiming the impossible was itself his deepest desire.
+Once that longing was fulfilled, he calmly returned what he had taken.
+Neither hero nor villain, Fafnir walked a morally grey path,
+teaching that desire is not inherently good or evil—it simply exists.
+
+Inspired by his legend, our community follows the spirit of embracing passion.
+
+</p>
+
+<a class="join"
+href="members.html"
+target="">
+
+See our Members Registry
+
+</a>
+
+</div>
+
+</div>
+
+</header>
+
+<section>
+
+<div class="card">
+
+<h2>About the Cult</h2>
+
+<p>
+
+The Fafnir Fetish Cult began inside the Comix Discord server as a Fetish Cult Organisation celebrating the wonderfully chaotic tastes of fetishes and desires of,
+manhwa, anime and visual novel fans.
+
+We take ourselves seriously—
+our "rituals" are Important discussions about character designs and tropes,
+our "scriptures" are holy,
+and our "followers" simply enjoy discussing their favourite Fetishes,
+desires and WAIFUS while paying tribute to the legendary Fafnir.
+
+Whether you're here for Fetish,
+culture,
+or simply because curiosity brought you here—
+
+Welcome.
+
+</p>
+
+<div class="people">
+
+<div class="person">
+
+<h3>Founder</h3>
+
+<p><b>FreyStarlight</b></p>
+
+</div>
+
+<div class="person">
+
+<h3>Co-Founder</h3>
+
+<p><b>Neonix</b></p>
+
+</div>
+
+</div>
+
+<div class="logo">
+
+<img src="comix.png" alt="Comix Logo">
+
+<div>
+
+<b>Born inside the Comix Discord Community</b><br>
+
+<small>Anime,manga,manhwa discussion server.</small>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+<h2 style="color:#7289DA;">Praise Desire.</h2>
+
+<p class="desire">
+
+"Those who deny desire are ruled by it.<br>
+Those who understand desire walk beside Fafnir."
+
+</p>
+
+<br>
+
+<small>
+
+© Fafnir Fetish Cult • For Desires
+
+</small>
+
+</footer>
+
+</body>
+</html>

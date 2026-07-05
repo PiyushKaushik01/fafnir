@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Fafnir Member Registry</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Cinzel:wght@600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="members.css">
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo-area">
+
+<img src="fafnir.png" class="logo">
+
+<div>
+
+<h2>FAFNIR CULT</h2>
+<p>Member Registry</p>
+
+</div>
+
+</div>
+
+<a href="index.html" class="homeButton">
+
+🏠 Home
+
+</a>
+
+</header>
+
+
+
+<section class="hero">
+
+<h1>Member Registry</h1>
+
+<p>
+
+Those who walk beside Fafnir are recorded within the Sacred Registry.
+
+</p>
+
+</section>
+
+
+
+<!-- Floating Edit Button -->
+
+<button id="editButton">
+
+✏ Edit Entries
+
+</button>
+
+
+
+<!-- Password Popup -->
+
+<div id="passwordPopup">
+
+<div class="popupBox">
+
+<h2>Registry Access</h2>
+
+<p>Enter Registry Password</p>
+
+<input
+type="password"
+id="password"
+placeholder="Password">
+
+<div class="popupButtons">
+
+<button id="unlockButton">
+
+Unlock
+
+</button>
+
+<button id="closePopup">
+
+Cancel
+
+</button>
+
+</div>
+
+<p id="wrongPassword"></p>
+
+</div>
+
+</div>
+
+
+
+<!-- Hidden Admin Panel -->
+
+<section id="adminPanel">
+
+<div class="entryCard">
+
+<h2>Add Member</h2>
+
+<div class="grid">
+
+<input
+id="name"
+placeholder="Name">
+
+<select id="gender">
+
+<option>E-boy</option>
+<option>E-girl</option>
+<option>E-object</option>
+
+</select>
+
+<input
+id="fetish"
+placeholder="Fetish">
+
+<input
+id="status"
+placeholder="Status">
+
+<select id="category">
+
+<option>Founding</option>
+<option>Elite</option>
+<option>Exclusive</option>
+<option>Unknown</option>
+<option>Regular</option>
+
+</select>
+
+<input
+id="avatar"
+placeholder="Avatar (optional)">
+
+</div>
+
+<button id="addButton">
+
+Add Member
+
+</button>
+
+</div>
+
+</section>
+
+
+
+<section id="registry">
+
+<div class="category">
+
+<h2>Founding</h2>
+
+<div id="Founding" class="memberContainer">
+
+</div>
+
+</div>
+
+
+
+<div class="category">
+
+<h2>Elite</h2>
+
+<div id="Elite" class="memberContainer">
+
+</div>
+
+</div>
+
+
+
+<div class="category">
+
+<h2>Exclusive</h2>
+
+<div id="Exclusive" class="memberContainer">
+
+</div>
+
+</div>
+
+
+
+<div class="category">
+
+<h2>Unknown</h2>
+
+<div id="Unknown" class="memberContainer">
+
+</div>
+
+</div>
+
+
+
+<div class="category">
+
+<h2>Regular</h2>
+
+<div id="Regular" class="memberContainer">
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<footer>
+
+<p class="desire">
+
+"Those who deny desire are ruled by it.<br>
+Those who understand desire walk beside Fafnir."
+
+</p>
+
+<p>
+
+© Fafnir Fetish Cult
+
+</p>
+
+</footer>
+
+
+
+<script src="members.js"></script>
+
+</body>
+
+</html>
