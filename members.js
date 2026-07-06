@@ -38,7 +38,7 @@ document.getElementById("unlockButton").onclick = () => {
 // LOAD MEMBERS.JSON
 // ===========================
 
-fetch("/api/members")
+fetch("members.json")
 
 .then(response => response.json())
 
@@ -100,70 +100,37 @@ function addMemberCard(member){
 // ADD MEMBER BUTTON
 // ===========================
 
-document.getElementById("addButton").onclick = function () {
+document.getElementById("addButton").onclick=function(){
 
-    const member = {
+    const member={
 
-        name: document.getElementById("name").value,
+        name:document.getElementById("name").value,
 
-        gender: document.getElementById("gender").value,
+        gender:document.getElementById("gender").value,
 
-        fetish: document.getElementById("fetish").value,
+        fetish:document.getElementById("fetish").value,
 
-        status: document.getElementById("status").value,
+        status:document.getElementById("status").value,
 
-        category: document.getElementById("category").value,
+        category:document.getElementById("category").value,
 
-        avatar: document.getElementById("avatar").value
+        avatar:document.getElementById("avatar").value
 
     };
 
-    fetch("/api/add-member", {
+    addMemberCard(member);
 
-        method: "POST",
+    alert(
+`Copy this into members.json:
 
-        headers: {
-
-            "Content-Type": "application/json"
-
-        },
-
-        body: JSON.stringify(member)
-
-    })
-
-    .then(res => res.json())
-
-    .then(data => {
-
-        if(data.success){
-
-            addMemberCard(member);
-
-            alert("Member added successfully!");
-
-            // Clear form
-
-            document.getElementById("name").value = "";
-            document.getElementById("fetish").value = "";
-            document.getElementById("status").value = "";
-            document.getElementById("avatar").value = "";
-
-        }else{
-
-            alert("Failed to add member.");
-
-        }
-
-    })
-
-    .catch(err => {
-
-        console.error(err);
-
-        alert("Server error.");
-
-    });
-
+{
+    "name":"${member.name}",
+    "gender":"${member.gender}",
+    "fetish":"${member.fetish}",
+    "status":"${member.status}",
+    "category":"${member.category}",
+    "avatar":"${member.avatar}"
+},`
+    );
 
 };
