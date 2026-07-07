@@ -13,7 +13,7 @@ const supabaseClient = window.supabase.createClient(
         }
     }
 );
-const ADMIN_EMAIL = "admin@fafnir.cult"; 
+const ADMIN_EMAIL = "admin@fafnir.cult";
 window.addEventListener('load', async () => {
     // This ensures that whenever the page finishes loading (even after a refresh),
     // you are logged out, effectively forcing a "Visitor" view.
@@ -35,7 +35,7 @@ document.getElementById("closePopup").onclick = () => {
 document.getElementById("unlockButton").onclick = async () => {
     const passwordInput = document.getElementById("password").value;
     const errorDisplay = document.getElementById("wrongPassword");
-    
+
     errorDisplay.innerHTML = "Verifying...";
 
     const { data, error } = await supabaseClient.auth.signInWithPassword({
@@ -50,17 +50,17 @@ document.getElementById("unlockButton").onclick = async () => {
         popup.style.display = "none";
         document.getElementById("adminPanel").style.display = "block";
         loadPendingRequests();
-        
+
         // --- ADD THIS LINE ---
         // This forces the cards to re-draw with the new 'true' session state
-        loadMembers(); 
+        loadMembers();
     }
 };
 // ===========================
 // LOAD MEMBERS FROM SUPABASE
 // ===========================
 
-async function loadMembers(){
+async function loadMembers() {
     // --- ADD THESE THREE LINES ---
     const containers = document.querySelectorAll(".memberContainer");
     containers.forEach(container => {
@@ -72,7 +72,7 @@ async function loadMembers(){
         .from("members")
         .select("*");
 
-    if(error){
+    if (error) {
         console.error(error);
         return;
     }
@@ -89,16 +89,17 @@ loadMembers();
 async function addMemberCard(member) {
     const card = document.createElement("div");
     card.className = "member";
-    
+    card.dataset.name = member.name.toLowerCase();
+
     // Check if user is logged in
     const { data: { session } } = await supabaseClient.auth.getSession();
-    
-  console.log("Is logged in?", !!session); 
-    
+
+    console.log("Is logged in?", !!session);
+
     let deleteBtnHTML = "";
-   if (session) {
-    deleteBtnHTML = `<button onclick="deleteMember(${member.id})" style="background:#ff4444; color:white; border:none; padding:5px; cursor:pointer; margin-top:10px;">Delete</button>`;
-}
+    if (session) {
+        deleteBtnHTML = `<button onclick="deleteMember(${member.id})" style="background:#ff4444; color:white; border:none; padding:5px; cursor:pointer; margin-top:10px;">Delete</button>`;
+    }
 
     let avatarHTML = "";
     if (member.avatar && member.avatar.trim() != "") {
@@ -123,7 +124,7 @@ async function addMemberCard(member) {
 // ===========================
 // ADD MEMBER BUTTON (DIRECT)
 // ===========================
-document.getElementById("addButton").onclick = async function(){
+document.getElementById("addButton").onclick = async function () {
     const btn = document.getElementById("addButton");
     btn.innerText = "Adding...";
     btn.disabled = true;
@@ -141,14 +142,14 @@ document.getElementById("addButton").onclick = async function(){
 
     const { error } = await supabaseClient.from("members").insert([member]);
 
-    if(error){
+    if (error) {
         console.error(error);
         alert("Failed to add member.");
     } else {
         loadMembers();
         alert("Member Added directly!");
     }
-    
+
     btn.innerText = "Add Member";
     btn.disabled = false;
 };
@@ -158,11 +159,11 @@ document.getElementById("addButton").onclick = async function(){
 // ===========================
 async function uploadAvatar(fileInput) {
     const file = fileInput.files[0];
-    if (!file) return ""; 
+    if (!file) return "";
 
     const fileExt = file.name.split('.').pop();
     const fileName = `${Math.random().toString(36).substring(2)}.${fileExt}`;
-    
+
     const { data, error } = await supabaseClient.storage
         .from('avatar')
         .upload(fileName, file);
@@ -222,7 +223,7 @@ document.getElementById("submitRequestBtn").onclick = async () => {
 // ===========================
 // ADMIN QUEUE LOGIC
 // ===========================
-let pendingApprovalData = null; 
+let pendingApprovalData = null;
 
 async function loadPendingRequests() {
     const queueContainer = document.getElementById("pendingQueue");
@@ -261,7 +262,7 @@ async function loadPendingRequests() {
     });
 }
 
-window.openApproveModalById = function(id){
+window.openApproveModalById = function (id) {
 
     pendingApprovalData =
         pendingRequests.find(r => r.id === id);
@@ -277,7 +278,7 @@ document.getElementById("cancelApproveBtn").onclick = () => {
 
 document.getElementById("confirmApproveBtn").onclick = async () => {
     if (!pendingApprovalData) return;
-    
+
     const finalMember = {
         name: pendingApprovalData.name,
         gender: pendingApprovalData.gender,
@@ -299,28 +300,28 @@ document.getElementById("confirmApproveBtn").onclick = async () => {
 
     document.getElementById("approvePopup").style.display = "none";
     pendingApprovalData = null;
-    loadPendingRequests(); 
-    loadMembers();         
+    loadPendingRequests();
+    loadMembers();
     alert("Member Approved and Added!");
 };
 
-window.rejectRequest = async function(id) {
+window.rejectRequest = async function (id) {
     if (!confirm("Are you sure you want to reject this request?")) return;
 
     const { error } = await supabaseClient.from("member_request").delete().eq("id", id);
-    
+
     if (error) {
         console.error("Reject error:", error);
     } else {
-        loadPendingRequests(); 
+        loadPendingRequests();
     }
 };
 // Add this at the end of members.js
-window.deleteMember = async function(id) {
+window.deleteMember = async function (id) {
     if (!confirm("Are you sure you want to delete this member?")) return;
 
     const { error } = await supabaseClient.from("members").delete().eq("id", id);
-    
+
     if (error) {
         alert("Error deleting member: " + error.message);
     } else {
@@ -329,14 +330,84 @@ window.deleteMember = async function(id) {
     }
 };
 // Add this to your members.js
-window.logoutAdmin = async function() {
+window.logoutAdmin = async function () {
     await supabaseClient.auth.signOut(); // This deletes the token from storage
     alert("Logged out!");
     location.reload(); // Now refresh
 };
-window.approveRequest = function(id, name, gender, fetish, status, avatar) {
+window.approveRequest = function (id, name, gender, fetish, status, avatar) {
     console.log("Approve button clicked for:", name); // Debugging
     pendingApprovalData = { id, name, gender, fetish, status, avatar };
     document.getElementById("approvePopup").style.display = "flex";
     document.getElementById("approveNameDisplay").innerText = name;
 };
+document.getElementById("searchButton").onclick = function(){
+
+    const search = document
+        .getElementById("memberSearch")
+        .value
+        .trim()
+        .toLowerCase();
+
+    const cards = document.querySelectorAll(".member");
+
+    let matches = 0;
+    let lastMatch = null;
+
+    cards.forEach(card=>{
+
+        card.classList.remove("memberHighlight");
+
+        const name = card.dataset.name.toLowerCase();
+
+        if(name.includes(search) && search !== ""){
+
+            matches++;
+
+            lastMatch = card;
+
+            card.classList.add("memberHighlight");
+
+        }
+
+    });
+
+    document.getElementById("searchCount").innerHTML =
+        matches + (matches === 1 ? " result found" : " results found");
+
+    // Auto-scroll only when exactly ONE result exists
+if(matches === 1){
+
+    window.lastSearchMatch = lastMatch;
+
+}else{
+
+    window.lastSearchMatch = null;
+
+}
+
+};
+let searchTimeout;
+
+document.getElementById("memberSearch").addEventListener("input", function(){
+
+    document.getElementById("searchButton").click();
+
+    clearTimeout(searchTimeout);
+
+    searchTimeout = setTimeout(()=>{
+
+        if(window.lastSearchMatch){
+
+            window.lastSearchMatch.scrollIntoView({
+
+                behavior:"smooth",
+                block:"center"
+
+            });
+
+        }
+
+    },850);
+
+});
