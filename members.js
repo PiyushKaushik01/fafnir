@@ -1,3 +1,4 @@
+let pendingRequests = [];
 const supabaseUrl = "https://ecjodjkhqryqldswsxym.supabase.co";
 const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVjam9kamtocXJ5cWxkc3dzeHltIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMzNDM0MTYsImV4cCI6MjA5ODkxOTQxNn0.pc9_0Hm3lW8MTngDqvkmLyPgFCxxel2v0IgKyQm3xjE";
 
@@ -228,6 +229,7 @@ async function loadPendingRequests() {
     queueContainer.innerHTML = "Loading...";
 
     const { data, error } = await supabaseClient.from("member_request").select("*");
+    pendingRequests = data;
 
     if (error) {
         console.error("Error fetching requests:", error);
@@ -252,16 +254,20 @@ async function loadPendingRequests() {
             <p>Fetish: ${req.fetish} | Status: ${req.status}</p>
             ${req.avatar ? `<a href="${req.avatar}" target="_blank" style="color:#00ffcc;">View Avatar</a>` : `No Avatar`}
             <br><br>
-            <button onclick='openApproveModal(${JSON.stringify(req)})'>Approve</button>
+           <button onclick="openApproveModalById(${req.id})">Approve</button>
             <button onclick='rejectRequest(${req.id})'>Reject</button>
         `;
         queueContainer.appendChild(div);
     });
 }
 
-window.openApproveModal = function(requestObj) {
-    pendingApprovalData = requestObj;
+window.openApproveModalById = function(id){
+
+    pendingApprovalData =
+        pendingRequests.find(r => r.id === id);
+
     document.getElementById("approvePopup").style.display = "flex";
+
 };
 
 document.getElementById("cancelApproveBtn").onclick = () => {
@@ -327,4 +333,10 @@ window.logoutAdmin = async function() {
     await supabaseClient.auth.signOut(); // This deletes the token from storage
     alert("Logged out!");
     location.reload(); // Now refresh
+};
+window.approveRequest = function(id, name, gender, fetish, status, avatar) {
+    console.log("Approve button clicked for:", name); // Debugging
+    pendingApprovalData = { id, name, gender, fetish, status, avatar };
+    document.getElementById("approvePopup").style.display = "flex";
+    document.getElementById("approveNameDisplay").innerText = name;
 };
