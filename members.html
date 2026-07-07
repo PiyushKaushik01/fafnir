@@ -3,253 +3,289 @@
 
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Fafnir Member Registry</title>
+    <title>Fafnir Member Registry</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Cinzel:wght@600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Cinzel:wght@600&display=swap"
+        rel="stylesheet">
 
-<link rel="stylesheet" href="members.css">
+    <link rel="stylesheet" href="members.css">
 
 </head>
 
 <body>
 
-<header>
+    <header>
 
-<div class="logo-area">
+        <div class="logo-area">
 
-<img src="fafnir.png" class="logo">
+            <img src="fafnir.png" class="logo">
 
-<div>
+            <div>
 
-<h2>FAFNIR CULT</h2>
-<p>Member Registry</p>
+                <h2>FAFNIR CULT</h2>
+                <p>Member Registry</p>
 
-</div>
+            </div>
 
-</div>
+        </div>
 
-<a href="index.html" class="homeButton">
+        <a href="index.html" class="homeButton">
 
-🏠 Home
+            🏠 Home
 
-</a>
+        </a>
 
-</header>
+    </header>
 
 
 
-<section class="hero">
+    <section class="hero">
 
-<h1>Member Registry</h1>
+        <h1>Member Registry</h1>
 
-<p>
+        <p>
 
-Those who walk beside Fafnir are recorded within the Sacred Registry.
+            Those who walk beside Fafnir are recorded within the Sacred Registry.
 
-</p>
+        </p>
 
-</section>
+    </section>
 
 
 
-<!-- Floating Edit Button -->
+    <!-- Floating Edit Button -->
 
-<button id="editButton">
+    <button id="editButton">
 
-✏ Edit Entries
+        ✏ Edit Entries
 
-</button>
+    </button>
+    <button id="requestButton"
+        style="position: fixed; bottom: 80px; right: 20px; z-index: 1000; padding: 10px 15px; border-radius: 5px; cursor: pointer;">
+        📝 Request Membership
+    </button>
 
+    <div id="requestPopup"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.8); justify-content: center; align-items: center; z-index: 2000;">
+        <div
+            style="background: #1a1a2e; padding: 25px; border-radius: 10px; width: 320px; text-align: center; border: 1px solid #444; display: flex; flex-direction: column; gap: 15px;">
+            <h2 style="margin-top: 0; margin-bottom: 10px;">Request to Join</h2>
 
+            <input id="reqName" placeholder="Name" style="padding: 10px; border-radius: 5px; border: none;">
+            <select id="reqGender" style="padding: 10px; border-radius: 5px; border: none;">
+                <option>E-boy</option>
+                <option>E-girl</option>
+                <option>E-object</option>
+            </select>
+            <input id="reqFetish" placeholder="Fetish" style="padding: 10px; border-radius: 5px; border: none;">
+            <input id="reqStatus" placeholder="Status (optional)"
+                style="padding: 10px; border-radius: 5px; border: none;">
 
-<!-- Password Popup -->
+            <div style="grid-column: span 2;">
+                <label style="display: block; margin-bottom: 5px;">Avatar Upload:</label>
+                <input type="file" id="reqAvatarFile" accept="image/*" style="width: 100%; display: block;">
+            </div>
 
-<div id="passwordPopup">
+            <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px;">
+                <button id="submitRequestBtn"
+                    style="padding: 10px 15px; border-radius: 5px; cursor: pointer; flex: 1;">Request Join</button>
+                <button id="closeRequestPopup"
+                    style="padding: 10px 15px; border-radius: 5px; cursor: pointer; flex: 1;">Cancel</button>
+            </div>
+        </div>
+    </div>
 
-<div class="popupBox">
 
-<h2>Registry Access</h2>
+    <!-- Password Popup -->
 
-<p>Enter Registry Password</p>
+    <div id="passwordPopup">
 
-<input
-type="password"
-id="password"
-placeholder="Password">
+        <div class="popupBox">
 
-<div class="popupButtons">
+            <h2>Registry Access</h2>
 
-<button id="unlockButton">
+            <p>Enter Registry Password</p>
 
-Unlock
+            <input type="password" id="password" placeholder="Password">
 
-</button>
+            <div class="popupButtons">
 
-<button id="closePopup">
+                <button id="unlockButton">
 
-Cancel
+                    Unlock
 
-</button>
+                </button>
 
-</div>
+                <button id="closePopup">
 
-<p id="wrongPassword"></p>
+                    Cancel
 
-</div>
+                </button>
 
-</div>
+            </div>
 
+            <p id="wrongPassword"></p>
 
+        </div>
 
-<!-- Hidden Admin Panel -->
+    </div>
 
-<section id="adminPanel">
 
-<div class="entryCard">
 
-<h2>Add Member</h2>
+    <!-- Hidden Admin Panel -->
 
-<div class="grid">
+    <section id="adminPanel" style="display: none;">
 
-<input
-id="name"
-placeholder="Name">
+        <div class="entryCard">
+            <h2>Pending Requests</h2>
+            <div id="pendingQueue">
+            </div>
+        </div>
 
-<select id="gender">
+        <div class="entryCard" style="margin-top: 20px;">
+            <h2>Direct Add Member</h2>
+            <div class="grid">
+                <input id="name" placeholder="Name">
+                <select id="gender">
+                    <option>E-boy</option>
+                    <option>E-girl</option>
+                    <option>E-object</option>
+                </select>
+                <input id="fetish" placeholder="Fetish">
+                <input id="status" placeholder="Status">
+                <select id="category">
+                    <option>Founding</option>
+                    <option>Elite</option>
+                    <option>Exclusive</option>
+                    <option>Unknown</option>
+                    <option>Regular</option>
+                </select>
+                <div>
+                    <label style="display: block; font-size: 14px; margin-bottom: 5px;">Avatar Upload:</label>
+                    <input type="file" id="adminAvatarFile" accept="image/*">
+                </div>
+            </div>
+            <button id="addButton">Add Member</button>
+        </div>
+    </section>
 
-<option>E-boy</option>
-<option>E-girl</option>
-<option>E-object</option>
+    <div id="approvePopup"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.8); justify-content: center; align-items: center; z-index: 2000;">
+        <div
+            style="background: #1a1a2e; padding: 25px; border-radius: 10px; width: 320px; text-align: center; border: 1px solid #444; display: flex; flex-direction: column; gap: 15px;">
+            <h2 style="margin-top: 0; margin-bottom: 10px;">Assign Category</h2>
 
-</select>
+            <select id="approveCategory"
+                style="padding: 10px; border-radius: 5px; border: none; font-size: 16px; background: #fff; color: #000;">
+                <option>Founding</option>
+                <option>Elite</option>
+                <option>Exclusive</option>
+                <option>Unknown</option>
+                <option>Regular</option>
+            </select>
 
-<input
-id="fetish"
-placeholder="Fetish">
+            <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px;">
+                <button id="confirmApproveBtn"
+                    style="padding: 10px 15px; border-radius: 5px; cursor: pointer; flex: 1; background: #4a4e69; color: white; border: none;">Confirm</button>
+                <button id="cancelApproveBtn"
+                    style="padding: 10px 15px; border-radius: 5px; cursor: pointer; flex: 1; background: #d90429; color: white; border: none;">Cancel</button>
+            </div>
+        </div>
+    </div>
 
-<input
-id="status"
-placeholder="Status">
 
-<select id="category">
+    <section id="registry">
 
-<option>Founding</option>
-<option>Elite</option>
-<option>Exclusive</option>
-<option>Unknown</option>
-<option>Regular</option>
+        <div class="category">
 
-</select>
+            <h2>Founding</h2>
 
-<input
-id="avatar"
-placeholder="Avatar (optional)">
+            <div id="Founding" class="memberContainer">
 
-</div>
+            </div>
 
-<button id="addButton">
+        </div>
 
-Add Member
 
-</button>
 
-</div>
+        <div class="category">
 
-</section>
+            <h2>Elite</h2>
 
+            <div id="Elite" class="memberContainer">
 
+            </div>
 
-<section id="registry">
+        </div>
 
-<div class="category">
 
-<h2>Founding</h2>
 
-<div id="Founding" class="memberContainer">
+        <div class="category">
 
-</div>
+            <h2>Exclusive</h2>
 
-</div>
+            <div id="Exclusive" class="memberContainer">
 
+            </div>
 
+        </div>
 
-<div class="category">
 
-<h2>Elite</h2>
 
-<div id="Elite" class="memberContainer">
+        <div class="category">
 
-</div>
+            <h2>Unknown</h2>
 
-</div>
+            <div id="Unknown" class="memberContainer">
 
+            </div>
 
+        </div>
 
-<div class="category">
 
-<h2>Exclusive</h2>
 
-<div id="Exclusive" class="memberContainer">
+        <div class="category">
 
-</div>
+            <h2>Regular</h2>
 
-</div>
+            <div id="Regular" class="memberContainer">
 
+            </div>
 
+        </div>
 
-<div class="category">
+    </section>
 
-<h2>Unknown</h2>
 
-<div id="Unknown" class="memberContainer">
 
-</div>
+    <footer>
 
-</div>
+        <p class="desire">
 
+            "Those who deny desire are ruled by it.<br>
+            Those who understand desire walk beside Fafnir."
 
+        </p>
 
-<div class="category">
+        <p>
 
-<h2>Regular</h2>
+            © Fafnir Fetish Cult
 
-<div id="Regular" class="memberContainer">
+        </p>
 
-</div>
+    </footer>
 
-</div>
 
-</section>
 
-
-
-<footer>
-
-<p class="desire">
-
-"Those who deny desire are ruled by it.<br>
-Those who understand desire walk beside Fafnir."
-
-</p>
-
-<p>
-
-© Fafnir Fetish Cult
-
-</p>
-
-</footer>
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="members.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="members.js"></script>
 
 </body>
 
